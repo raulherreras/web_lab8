@@ -1,9 +1,16 @@
+// Dependencies
 var express = require("express");
 var path = require("path");
 
+// Sets up the Express App
 var app = express();
 var PORT = 3000;
 
+// Sets up the Express app to handle data parsing
+app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
+
+// Reservations and waiting list (DATA)
 var reservations = [
     {
       customerName: "John Test",
@@ -34,6 +41,8 @@ var reservations = [
     },
   ];
 
+// Routes
+
 app.get("/", function(req, res) {
   res.sendFile(path.join(__dirname, "home.html"));
 });
@@ -54,6 +63,22 @@ app.get("/api/waitlist", function(req, res) {
   return res.json(waitingList);
 });
 
+app.post("/reserve", function(req, res) {
+  var newReservation = req.body;
+
+  console.log(newReservation);
+
+  if (reservations.length < 5) {
+    reservations.push(newReservation);
+  }
+  else {
+    waitingList.push(newReservation);
+  }
+
+  res.json(newReservation);
+});
+
+// Starts the server to begin listening
 app.listen(PORT, ()=> {
   console.log("Server on port " + PORT);
 });

@@ -71,8 +71,32 @@
 <!-- BELOW CODE IS CRITICAL. IT HANDLES HOW FORM DATA IS LOADED FROM OUR SERVER -->
 <script type="text/javascript">
 
+function loadReservationData(dataUrl, containerId) {
+  $.ajax({
+    url: dataUrl,
+    success: function(data) {
+      console.log(data);
+      var tableList = $(containerId);
+      for (var i = 0; i < data.length; i++) {
+        var table = $('<li class="list-group-item">');
+        table.append(
+          $("<h2>").text(`Table #${i + 1}`),
+          $("<hr>"),
+          $("<h2>").text(`ID: ${data[i].customerID}`),
+          $("<h2>").text(`Name: ${data[i].customerName}`),
+          $("<h2>").text(`Email: ${data[i].customerEmail}`),
+          $("<h2>").text(`Phone: ${data[i].phoneNumber}`));
+        tableList.append(table);
+      }
+    },
+    error: function() {
+      console.log("Unable to obtain information.");
+    }
+  });
+}
 
-
+loadReservationData('http://localhost:3000/api/tables', '#tableList');
+loadReservationData('http://localhost:3000/api/waitlist', '#waitList');
 
 </script>
 

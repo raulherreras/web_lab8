@@ -70,12 +70,14 @@ app.post("/reserve", function(req, res) {
 
   if (reservations.length < 5) {
     reservations.push(newReservation);
+    console.log(true);
+    return res.json(true);
   }
   else {
     waitingList.push(newReservation);
+    console.log(false);
+    return res.json(false);
   }
-
-  res.json(newReservation);
 });
 
 // Starts the server to begin listening

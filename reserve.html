@@ -85,5 +85,23 @@
 <!-- BELOW CODE IS CRITICAL. IT HANDLES HOW FORM DATA IS SENT TO OUR SERVER -->
 <script type="text/javascript">
 
+$(".btn btn-primary submit").on("click", function(event) {
+  event.preventDefault();
+
+  var newReservation = {
+    customerName: $("#reserve-name").val(),
+    customerEmail: $("#reserve-name").val(),
+    customerID: $("#reserve-name").val(),
+    phoneNumber: $("#reserve-name").val()
+  }
+
+  $.post('http://localhost:3000/api/reserve', newReservation, function(data) {
+    if(data) {
+      alert("Thank you for your reserevation. You have been assigned a table!");
+    } else {
+      alert("Sorry, we are fully booked. you have been added to the waiting list");
+    }
+  })
+});
 
 </script>

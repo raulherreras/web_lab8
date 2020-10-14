@@ -16,13 +16,13 @@ var reservations = [
       customerName: "John Test",
       customerEmail: "john@test.com",
       customerID: "123",
-      phoneNumber: "123-456-7890",
+      phoneNumber: "123-456-7890"
     },
     {
       customerName: "fake person",
       customerEmail: "fake@test.com",
       customerID: "12345",
-      phoneNumber: "123-456-9999",
+      phoneNumber: "123-456-9999"
     },
   ];
 
@@ -31,13 +31,13 @@ var reservations = [
       customerName: "waiting list guy #1",
       customerEmail: "john@test.com",
       customerID: "123",
-      phoneNumber: "123-456-7890",
+      phoneNumber: "123-456-7890"
     },
     {
       customerName: "waiting person #2",
       customerEmail: "fake@test.com",
       customerID: "12345",
-      phoneNumber: "123-456-9999",
+      phoneNumber: "123-456-9999"
     },
   ];
 

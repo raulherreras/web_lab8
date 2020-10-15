@@ -41,17 +41,22 @@ var reservations = [
     },
   ];
 
+var visitCounter = 0;
+
 // Routes
 
 app.get("/", function(req, res) {
+  visitCounter++;
   res.sendFile(path.join(__dirname, "home.html"));
 });
 
 app.get("/tables", function(req, res) {
+  visitCounter++;
   res.sendFile(path.join(__dirname, "tables.html"));
 });
 
 app.get("/reserve", function(req, res) {
+  visitCounter++;
   res.sendFile(path.join(__dirname, "reserve.html"));
 });
 
@@ -61,6 +66,10 @@ app.get("/api/tables", function(req, res) {
 
 app.get("/api/waitlist", function(req, res) {
   return res.json(waitingList);
+});
+
+app.get("/api/visitCounter", function(req, res) {
+  return res.send(visitCounter.toString());
 });
 
 // adds a new reservation

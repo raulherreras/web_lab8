@@ -59,7 +59,7 @@
       <div class="container">
         <p>Control Panel</p>
         <p><a href="#" id="clear">Clear Table</a> | <a href="/api/tables">API Table Link</a> | <a href="/api/waitlist">API
-            Wait List</a>
+            Wait List</a></p>
       </div>
     </footer>
 
@@ -90,13 +90,29 @@ function loadReservationData(dataUrl, containerId) {
       }
     },
     error: function() {
-      console.log("Unable to obtain information.");
+      console.log("Unable to obtain reservation data.");
+    }
+  });
+}
+
+function loadVisitCounter() {
+  $.ajax({
+    url: 'api/visitCounter',
+    success: function(data) {
+      //$("#visitCounter").append(data);
+      $("footer").append(
+        $("<p>").text(`Total visits: ${data}`)
+      );
+    },
+    error: function() {
+      console.log("Unable to obtain visit counter.");
     }
   });
 }
 
 loadReservationData('/api/tables', '#tableList');
 loadReservationData('/api/waitlist', '#waitList');
+loadVisitCounter();
 
 </script>
 

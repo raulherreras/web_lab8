@@ -73,6 +73,7 @@
         <p>
           <a href="/api/tables">API Table Link</a> |
           <a href="/api/waitlist">API Wait List</a>
+        </p>
       </div>
     </footer>
 
@@ -110,7 +111,23 @@ $(".submit").on("click", function(event) {
     $("#reserve-email").val("");
     $("#reserve-unique-id").val("");
   });
-  
 });
+
+function loadVisitCounter() {
+  $.ajax({
+    url: 'api/visitCounter',
+    success: function(data) {
+      //$("#visitCounter").append(data);
+      $("footer").append(
+        $("<p>").text(`Total visits: ${data}`)
+      );
+    },
+    error: function() {
+      console.log("Unable to obtain visit counter.");
+    }
+  });
+}
+
+loadVisitCounter();
 
 </script>

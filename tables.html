@@ -99,7 +99,6 @@ function loadVisitCounter() {
   $.ajax({
     url: 'api/visitCounter',
     success: function(data) {
-      //$("#visitCounter").append(data);
       $("footer").append(
         $("<p>").text(`Total visits: ${data}`)
       );
@@ -113,6 +112,21 @@ function loadVisitCounter() {
 loadReservationData('/api/tables', '#tableList');
 loadReservationData('/api/waitlist', '#waitList');
 loadVisitCounter();
+
+$("#clear").on("click", function(event) {
+  event.preventDefault();
+
+  $.post('/api/clearReservations', function(data) {
+    if(data) {
+      $("#tableList").empty();
+      $("#waitList").empty();
+      console.log("Cleared all reservations.");
+    } else {
+      console.log("ERROR. Unable to clear reservations");
+      alert("ERROR. Unable to clear reservations");
+    }
+  });
+});
 
 </script>
 

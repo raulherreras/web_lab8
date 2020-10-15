@@ -41,6 +41,7 @@ var reservations = [
     },
   ];
 
+// Adds 1 to counter every time an HTML page is visited
 var visitCounter = 0;
 
 // Routes
@@ -72,8 +73,7 @@ app.get("/api/visitCounter", function(req, res) {
   return res.send(visitCounter.toString());
 });
 
-// adds a new reservation
-// returns true if a table was available, false if not
+// Adds a new reservation. Returns true if a table was available, false if not
 app.post("/api/reserve", function(req, res) {
   var newReservation = req.body;
   console.log(newReservation);
@@ -89,6 +89,13 @@ app.post("/api/reserve", function(req, res) {
   }
   console.log(tableAvailable);
   return res.json(tableAvailable);
+});
+
+app.post("/api/clearReservations", function(req, res) {
+  reservations = [];
+  waitingList = [];
+  console.log("Cleared all reservations.")
+  return res.json(true);
 });
 
 // Starts the server to begin listening

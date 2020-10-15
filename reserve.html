@@ -85,23 +85,32 @@
 <!-- BELOW CODE IS CRITICAL. IT HANDLES HOW FORM DATA IS SENT TO OUR SERVER -->
 <script type="text/javascript">
 
-$(".btn btn-primary submit").on("click", function(event) {
+$(".submit").on("click", function(event) {
   event.preventDefault();
 
   var newReservation = {
-    customerName: $("#reserve-name").val(),
-    customerEmail: $("#reserve-name").val(),
-    customerID: $("#reserve-name").val(),
-    phoneNumber: $("#reserve-name").val()
-  }
+    customerName: $("#reserve-name").val().trim(),
+    customerEmail: $("#reserve-email").val().trim(),
+    customerID: $("#reserve-unique-id").val().trim(),
+    phoneNumber: $("#reserve-phone").val().trim()
+  };
 
-  $.post('http://localhost:3000/api/reserve', newReservation, function(data) {
+  // send POST request with form data
+  $.post('/api/reserve', newReservation, function(data) {
+    // request returns true if a table was available, false if not
     if(data) {
-      alert("Thank you for your reserevation. You have been assigned a table!");
+      alert("Thank you for your reservation. You have been assigned a table!");
     } else {
       alert("Sorry, we are fully booked. you have been added to the waiting list");
     }
-  })
+
+    // Clear form after alert message is closed
+    $("#reserve-name").val("");
+    $("#reserve-phone").val("");
+    $("#reserve-email").val("");
+    $("#reserve-unique-id").val("");
+  });
+  
 });
 
 </script>

@@ -63,21 +63,23 @@ app.get("/api/waitlist", function(req, res) {
   return res.json(waitingList);
 });
 
+// adds a new reservation
+// returns true if a table was available, false if not
 app.post("/api/reserve", function(req, res) {
   var newReservation = req.body;
-
   console.log(newReservation);
-
+  
+  var tableAvailable;
   if (reservations.length < 5) {
     reservations.push(newReservation);
-    console.log(true);
-    return res.json(true);
+    tableAvailable = true;
   }
   else {
     waitingList.push(newReservation);
-    console.log(false);
-    return res.json(false);
+    tableAvailable = false;
   }
+  console.log(tableAvailable);
+  return res.json(tableAvailable);
 });
 
 // Starts the server to begin listening
